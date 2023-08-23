@@ -325,6 +325,9 @@ stopwaitsecs=3600
 - Add php dependencies
     - `composer require beyondcode/laravel-websockets`
     - `composer require laravel/horizon`
+    - `composer require predis/predis`
+    - `composer require tightenco/ziggy`
+    - `composer require yajra/laravel-datatables-oracle`
 
 - Setup .env
 ```
