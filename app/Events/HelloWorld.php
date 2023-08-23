@@ -50,7 +50,7 @@ class HelloWorld implements ShouldBroadcast
     public function broadcastWith(): array
     {
         return [
-            'text' => 'world',
+            'text' => __('messages.hello_message'),
             'when' => $this->when
         ];
     }

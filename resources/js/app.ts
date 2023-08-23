@@ -2,6 +2,8 @@ import '../css/app.scss';
 import './bootstrap';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
+import Swal from "sweetalert2";
+
 
 window.Pusher = Pusher;
 
@@ -20,4 +22,10 @@ window.Echo = new Echo({
 });
 
 window.Echo.channel('public')
-    .listen('.event', (data) => console.log(data))
+    .listen('.event', async (data) => {
+        console.log(data);
+        await Swal.fire({
+            icon: 'info',
+            text: `${data.text} ${data.when}`
+        })
+    })

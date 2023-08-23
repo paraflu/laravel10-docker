@@ -37,6 +37,7 @@ return [
             'app_id' => /*env('PUSHER_APP_ID')*/ 'appid',
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
+                'host' => env('PUSHER_APP_HOST', 'websocket'),
                 'port' => env('PUSHER_PORT', 6001),
                 'scheme' => env('PUSHER_SCHEME', 'http'),
                 'encrypted' => true,
