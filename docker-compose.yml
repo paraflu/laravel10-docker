@@ -1,0 +1,112 @@
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: develop
+
+        volumes:
+            - .:/var/www/html
+        env_file: .env
+
+        ports:
+            - ${APP_PORT:-8000}:80
+            - ${VITE_PORT:-5173}:${VITE_PORT:-5173}
+
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+        depends_on:
+            db:
+                condition: service_healthy
+            cache:
+                condition: service_healthy
+
+    supervisor:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        env_file: .env
+        command: [ "/entrypoint.sh", "supervisor" ]
+        volumes:
+            - .:/var/www/html
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+        depends_on:
+            db:
+                condition: service_healthy
+            cache:
+                condition: service_healthy
+
+    cron:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        env_file: .env
+        command: [ "/entrypoint.sh", "cron" ]
+        volumes:
+            - .:/var/www/html
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+        depends_on:
+            db:
+                condition: service_healthy
+            cache:
+                condition: service_healthy
+
+    websocket:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        env_file: .env
+        command: [ "/entrypoint.sh", "websocket" ]
+        volumes:
+            - .:/var/www/html
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+        ports:
+            - 6100:6100
+
+        depends_on:
+            db:
+                condition: service_healthy
+            cache:
+                condition: service_healthy
+    db:
+        image: mariadb
+        env_file: .env
+        environment:
+            - MYSQL_DATABASE=${DB_DATABASE}
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+        ports:
+            - ${DB_PORT:-3306}:3306
+
+        volumes:
+            - ../data/mysqldata:/var/lib/mysql
+            - ../data/init:/docker-entrypoint-initdb.d
+
+        healthcheck:
+            test:
+                [
+                    "CMD",
+                    "mysqladmin",
+                    "ping",
+                    "-u",
+                    "root",
+                    "-p${DB_PASSWORD}",
+                    "-h",
+                    "localhost"
+                ]
+            timeout: 20s
+            retries: 10
+
+    cache:
+        image: redis
+        env_file: .env
+        healthcheck:
+            test: [ "CMD", "redis-cli", "ping" ]
