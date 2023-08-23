@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\HelloWorld;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-//    dispatch(new \App\Events\HelloWorld(now()))->delay(now()->addSeconds(15));
+    dispatch(new HelloWorld(now()))->delay(now()->addSeconds(15));
     return view('welcome');
 });

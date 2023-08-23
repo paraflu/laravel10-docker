@@ -344,3 +344,13 @@ SESSION_DRIVER=redis
 REDIS_HOST=cache
 
 ```
+
+# Start development
+
+- start vite on container `docker-compose exec web npm start`
+- I suggest to set this alias
+```shell
+ alias dce="docker-compose exec"
+ alias a="docker-compose exec php artisan"
+```
+

@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "predis/predis": "^2.2",
+        "react/promise": "^2.",
         "tightenco/ziggy": "^1.6",
         "yajra/laravel-datatables-oracle": "^10.8"
     },
