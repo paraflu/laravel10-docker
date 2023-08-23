@@ -323,11 +323,18 @@ stopwaitsecs=3600
     Here we can place the sql file to init db
 
 - Add php dependencies
-    - `composer require beyondcode/laravel-websockets`
-    - `composer require laravel/horizon`
-    - `composer require predis/predis`
-    - `composer require tightenco/ziggy`
-    - `composer require yajra/laravel-datatables-oracle`
+  - `composer require beyondcode/laravel-websockets` for websocket
+    
+     After install need to run this command:
+     
+     - `php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="migrations"`
+     - `php artisan migrate`
+     - `php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="config"`
+  - `composer require laravel/horizon` for horizon dashboard
+  - `composer require predis/predis` for redis support
+  - `composer require tightenco/ziggy` for @routes directive
+  - `composer require yajra/laravel-datatables-oracle` for datatable facade
+  - `composer require conedevelopment/i18n` for @translations blade directive
 
 - Setup .env
 ```

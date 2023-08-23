@@ -23,6 +23,7 @@
         "fontawesome-free": "^1.0.4",
         "laravel-echo": "^1.15.2",
         "pusher-js": "^7.6.0",
-        "sweetalert2": "^11.7.27"
+        "sweetalert2": "^11.7.27",
+        "vue-i18n": "^9.2.2"
     }
 }

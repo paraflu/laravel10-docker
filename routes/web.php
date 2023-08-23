@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    dispatch(new HelloWorld(now()))->delay(now()->addSeconds(15));
+    event(new HelloWorld(now(), 5));
     return view('welcome');
 });

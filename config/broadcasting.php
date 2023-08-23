@@ -32,9 +32,9 @@ return [
 
         'pusher' => [
             'driver' => 'pusher',
-            'key' => env('PUSHER_APP_KEY'),
-            'secret' => env('PUSHER_APP_SECRET'),
-            'app_id' => env('PUSHER_APP_ID'),
+            'key' => /*env('PUSHER_APP_KEY')*/ 'e02fh504h8l5khgjvkyzxhv54gup995p',
+            'secret' => /*env('PUSHER_APP_SECRET')*/ '27qlf81gevkd3s6nopwsi5wsn3pb8kyc',
+            'app_id' => /*env('PUSHER_APP_ID')*/ 'appid',
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'port' => env('PUSHER_PORT', 6001),

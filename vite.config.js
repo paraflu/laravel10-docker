@@ -29,6 +29,7 @@ export default defineConfig({
     plugins: [
         laravel([
             'resources/js/app.ts',
+            'resources/js/page/home/home.ts',
         ]),
         vue({
             template: {
