@@ -1,3 +1,12 @@
+/**
+ * you need to import the some interfaces
+ */
+import {
+    DefineLocaleMessage,
+    DefineDateTimeFormat,
+    DefineNumberFormat
+} from 'vue-i18n'
+
 declare module "*.vue" {
     import type {defineComponent} from "vue";
     const component: defineComponent<{}, {}, any>;
@@ -14,15 +23,6 @@ interface ImportMetaEnv {
 interface ImportMeta {
     readonly env: ImportMetaEnv;
 }
-
-/**
- * you need to import the some interfaces
- */
-import {
-    DefineLocaleMessage,
-    DefineDateTimeFormat,
-    DefineNumberFormat
-} from 'vue-i18n'
 
 declare module 'vue-i18n' {
     // define the locale messages schema
@@ -54,3 +54,5 @@ declare module 'vue-i18n' {
         }
     }
 }
+
+type Theme = 'light' | 'dark' | 'system';
