@@ -1,5 +1,6 @@
 # Setup Laravel 10 and docker
 
+🎇 🎉 Now with Vue+Inertia+Tailwind 🎉 🎇
 
 - Create the project
 
