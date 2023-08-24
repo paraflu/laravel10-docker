@@ -1,31 +1,23 @@
-import '../css/app.scss';
 import './bootstrap';
-import Echo from 'laravel-echo';
-import Pusher from 'pusher-js';
-import Swal from "sweetalert2";
+import '../css/app.css';
 
+import { createApp, h, DefineComponent } from 'vue';
+import { createInertiaApp } from '@inertiajs/vue3';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 
-window.Pusher = Pusher;
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
-window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: import.meta.env.VITE_PUSHER_APP_KEY,
-    wsHost: window.location.hostname,
-    httpHost: window.location.hostname,
-    httpsHost: window.location.hostname,
-    wssHost: window.location.hostname,
-    wsPort: window.location.port ?? 80,
-    wssPort: window.location.port ?? 80,
-    cluster: 'eu',
-    forceTLS: false,
-    disableStats: false,
+createInertiaApp({
+    title: (title) => `${title} - ${appName}`,
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob<DefineComponent>('./Pages/**/*.vue')),
+    setup({ el, App, props, plugin }) {
+        createApp({ render: () => h(App, props) })
+            .use(plugin)
+            .use(ZiggyVue, Ziggy)
+            .mount(el);
+    },
+    progress: {
+        color: '#4B5563',
+    },
 });
-
-window.Echo.channel('public')
-    .listen('.event', async (data) => {
-        console.log(data);
-        await Swal.fire({
-            icon: 'info',
-            text: `${data.text} ${data.when}`
-        })
-    })

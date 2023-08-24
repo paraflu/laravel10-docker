@@ -1,27 +1,19 @@
 {
     "compilerOptions": {
-        "target": "ES2015",
-        "module": "es2020",
-        "moduleResolution": "node",
-        "baseUrl": "./",
-        "paths": {
-            "@js/*": [
-                "resources/js/*"
-            ]
-        },
-        // "allowJs": true,
+        "allowJs": true,
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "jsx": "preserve",
         "strict": true,
-        "skipLibCheck": true,
-        "noImplicitAny": false,
-        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "target": "ESNext",
         "esModuleInterop": true,
-        "sourceMap": true
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "skipLibCheck": true,
+        "paths": {
+            "@/*": ["./resources/js/*"]
+        }
     },
-    "include": [
-        "resources/js/**/*"
-    ],
-    "exclude": [
-        "node_modules/**/*",
-        "public/js/**"
-    ]
+    "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.vue"]
 }
